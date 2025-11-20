@@ -1,4 +1,6 @@
 import { Info } from "lucide-react";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { CodeBlock } from "./CodeBlock";
 import { MediaEmbed } from "./MediaEmbed";
 import type { DocStep as DocStepType } from "@/data/documentation";
@@ -19,8 +21,19 @@ export function DocStep({ step, stepNumber }: DocStepProps) {
           <h3 className="text-xl font-semibold text-foreground mb-3 flex items-center gap-2">
             {step.title}
           </h3>
-          <div className="prose prose-slate max-w-none">
-            <p className="text-foreground/90 leading-relaxed mb-4">{step.content}</p>
+          <div className="prose prose-slate dark:prose-invert max-w-none 
+            prose-headings:text-foreground prose-headings:font-bold
+            prose-h2:text-lg prose-h2:mt-6 prose-h2:mb-3 prose-h2:border-b prose-h2:border-border prose-h2:pb-2
+            prose-h3:text-base prose-h3:mt-4 prose-h3:mb-2
+            prose-p:text-foreground/90 prose-p:leading-relaxed
+            prose-strong:text-foreground prose-strong:font-semibold
+            prose-code:text-foreground prose-code:bg-muted prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded 
+            prose-code:before:content-none prose-code:after:content-none prose-code:font-mono prose-code:text-sm
+            prose-li:text-foreground/90 prose-li:leading-relaxed prose-li:my-1
+            prose-ol:space-y-2 prose-ul:space-y-2
+            prose-ul:list-disc prose-ul:ml-6
+            prose-ol:list-decimal prose-ol:ml-6">
+            <ReactMarkdown remarkPlugins={[remarkGfm]}>{step.content}</ReactMarkdown>
             
             {step.code && (
               <div className="my-4">
